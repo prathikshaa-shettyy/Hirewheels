@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository("vehicleDAO")
 public interface VehicleDAO extends JpaRepository<Vehicle,Integer> {
-    List<Vehicle> findByVehicleSubcategory(VehicleSubCategory.VehicleSubcategory vehicleSubcategory);
+    List<Vehicle> findByVehicleSubcategory(VehicleSubCategory vehicleSubcategory);
 
     Optional<Vehicle> findByVehicleNumber(String vehicleNumber);
 

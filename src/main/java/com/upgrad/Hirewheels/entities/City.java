@@ -14,6 +14,9 @@ public class City {
     @Column(length = 50, nullable = false)
     private String cityName;
 
+    @OneToMany(mappedBy = "city")
+    private Set<Location> location;
+
     public City(int cityId, String cityName) {
         this.cityId = cityId;
         this.cityName = cityName;
@@ -41,9 +44,6 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
-                "cityId=" + cityId +
-                ", cityName='" + cityName + '\'' +
-                '}';
+        return "City{" + "cityId=" + cityId + ", cityName='" + cityName + '\'' + '}';
     }
 }

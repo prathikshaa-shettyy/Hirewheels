@@ -14,6 +14,9 @@ public class Role {
     @Column(length = 50, nullable = false, unique = true)
     private String roleName;
 
+    @OneToMany(mappedBy = "role")
+    private Set<User> user;
+
     public Role(int roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
@@ -39,12 +42,8 @@ public class Role {
         this.roleName = roleName;
     }
 
-
     @Override
     public String toString() {
-        return "Role{" +
-                "roleId=" + roleId +
-                ", roleName='" + roleName + '\'' +
-                '}';
+        return "Role{" + "roleId=" + roleId + ",roleName='" + roleName + '\'' + '}';
     }
 }

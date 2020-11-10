@@ -20,6 +20,14 @@ public class Location {
     @Column(length = 6, nullable = false)
     private String pincode;
 
+    @OneToMany(mappedBy = "location")
+    private Set<Booking> booking;
+
+    @OneToMany(mappedBy = "location")
+    private Set<Vehicle> vehicle;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
     public Location(int locationId, String locationName, String address, City city, String pincode) {
@@ -75,12 +83,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{" +
-                "locationId=" + locationId +
-                ", locationName='" + locationName + '\'' +
-                ", address='" + address + '\'' +
-                ", pincode=" + pincode +
-                ", city=" + city +
-                '}';
+        return "Location{" + "locationId=" + locationId + ", locationName='" + locationName + '\'' + ", address='" + address + '\'' + ", pincode=" + pincode + ", city=" + city + '}';
     }
 }

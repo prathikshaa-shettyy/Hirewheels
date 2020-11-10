@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "VEHICLECATEGORY")
 public class VehicleCategory {
 
     @Id
@@ -12,6 +13,9 @@ public class VehicleCategory {
 
     @Column(length = 50, nullable = false, unique = true)
     private String vehicleCategoryName;
+
+    @OneToMany(mappedBy = "vehicleCategory")
+    private Set<VehicleSubCategory> vehicleSubcategory;
 
     public VehicleCategory(int vehicleCategoryId, String vehicleCategoryName) {
         this.vehicleCategoryId = vehicleCategoryId;
@@ -41,9 +45,6 @@ public class VehicleCategory {
 
     @Override
     public String toString() {
-        return "VehicleCategory{" +
-                "vehicleCategoryId=" + vehicleCategoryId +
-                ", vehicleCategoryName='" + vehicleCategoryName + '\'' +
-                '}';
+        return "VehicleCategory{" + "vehicleCategoryId=" + vehicleCategoryId + ", vehicleCategoryName='" + vehicleCategoryName + '\'' + ", vehicleSubcategory=" + vehicleSubcategory + '}';
     }
 }

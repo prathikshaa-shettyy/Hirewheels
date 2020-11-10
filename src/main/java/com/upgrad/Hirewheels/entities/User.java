@@ -1,11 +1,11 @@
 package com.upgrad.Hirewheels.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "USER")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
@@ -28,6 +28,13 @@ public class User {
     @Column(length = 10, precision = 2)
     private double walletMoney= 10000.00f;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Booking> booking;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
     public User(String firstName, String lastName, String password, String email, String mobileNo, double walletMoney, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,6 +42,7 @@ public class User {
         this.email = email;
         this.mobileNo = mobileNo;
         this.walletMoney = walletMoney;
+        this.role = role;
     }
 
     public User() {
@@ -97,16 +105,16 @@ public class User {
     }
 
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", mobileNo='" + mobileNo + '\'' +
-                ", walletMoney=" + walletMoney +
-                '}';
+        return "User{" + "userId=" + userId + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", password='" + password + '\'' + ", email='" + email + '\'' + ", mobileNo='" + mobileNo + '\'' + ", walletMoney=" + walletMoney + ", role=" + role + '}';
     }
 }

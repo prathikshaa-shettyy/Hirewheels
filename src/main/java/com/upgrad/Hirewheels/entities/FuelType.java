@@ -14,6 +14,9 @@ public class FuelType {
     @Column(length = 50, nullable = false, unique = true)
     private String fuelTypeName;
 
+    @OneToMany(mappedBy = "fuelType")
+    private Set<Vehicle> vehicle;
+
     public FuelType(int fuelTypeId, String fuelType) {
         this.fuelTypeId = fuelTypeId;
         this.fuelTypeName = fuelTypeName;
@@ -40,9 +43,6 @@ public class FuelType {
 
     @Override
     public String toString() {
-        return "FuelType{" +
-                "fuelTypeId=" + fuelTypeId +
-                ", fuelTypeName='" + fuelTypeName + '\'' +
-                '}';
+        return "FuelType{" + "fuelTypeId=" + fuelTypeId + ", fuelTypeName='" + fuelTypeName + '\'' + '}';
     }
 }

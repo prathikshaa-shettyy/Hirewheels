@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "BOOKING")
 public class Booking {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookingId;
@@ -23,7 +22,17 @@ public class Booking {
     @Column(length = 10, precision = 2, nullable = false)
     private double amount;
 
+    @ManyToOne
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location location;
 
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private Vehicle vehicle;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     public Booking() {
     }
@@ -33,6 +42,9 @@ public class Booking {
         this.dropOffDate = dropoffDate;
         this.bookingDate = bookingDate;
         this.amount = amount;
+        this.location = location;
+        this.vehicle = vehicle;
+        this.user = user;
     }
 
     public int getBookingId() {
@@ -75,15 +87,32 @@ public class Booking {
         this.amount = amount;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public User getUsers() {
+        return user;
+    }
+
+    public void setUsers(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
-        return "Booking{" +
-                "bookingId=" + bookingId +
-                ", pickUpDate=" + pickUpDate +
-                ", dropOffDate=" + dropOffDate +
-                ", bookingDate=" + bookingDate +
-                ", amount=" + amount +
-                '}';
+        return "Booking{" + "bookingId=" + bookingId + ", pickUpDate=" + pickUpDate + ", dropOffDate=" + dropOffDate + ", bookingDate=" + bookingDate + ", amount=" + amount + ", location=" + location + ", vehicle=" + vehicle + ", user=" + user + '}';
     }
 }
