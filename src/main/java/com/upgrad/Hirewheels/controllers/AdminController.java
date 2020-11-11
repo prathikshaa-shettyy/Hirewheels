@@ -4,6 +4,7 @@ import com.upgrad.Hirewheels.entities.Vehicle;
 import com.upgrad.Hirewheels.exceptions.VehicleNotFoundException;
 import com.upgrad.Hirewheels.services.AdminService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,14 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.logging.Logger;
-
-
 @RestController
 @RequestMapping(value="/Hirewheels/v1")
 public class AdminController {
 
-    private static  final Logger logger= (Logger) LoggerFactory.getLogger(AdminController.class);
+    private static  final Logger logger= LoggerFactory.getLogger(AdminController.class);
 
     @Autowired
     ModelMapper modelmapper;
@@ -35,10 +33,10 @@ public class AdminController {
     }
 
     @PutMapping(value = "/vehicles/{vehicleid}")
-    public ResponseEntity changeVehicleAvailability(@PathVariable(name = "vehicleid")int id,@RequestBody VehicleDTO vehicleDTO) throws VehicleNotFoundException {
+    public ResponseEntity changeVehicleAvailability(@PathVariable(name = "vehicleid")int vehicleId,@RequestBody VehicleDTO vehicleDTO) throws VehicleNotFoundException {
         Vehicle vehicle=modelmapper.map(vehicleDTO,Vehicle.class);
-        Vehicle updateVehicle=adminService.changeAvailabilty(id);
-        logger.debug("Updated availability status for id:"+id, vehicleDTO);
+        Vehicle updateVehicle=adminService.changeAvailabilty(vehicleId);
+        logger.debug("Updated availability status for vehicle id :"+vehicleId, vehicleDTO);
         return new ResponseEntity<>(updateVehicle,HttpStatus.OK);
     }
 
