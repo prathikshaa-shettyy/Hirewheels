@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class VehicleController {
+public class VehicleController
+{
     @Autowired
     VehicleService vehicleService;
     @Autowired
@@ -26,6 +27,7 @@ public class VehicleController {
     @Autowired
     ModelMapper modelMapper;
     @GetMapping(value= {"/hirewheels/v1/vehicles"}, produces = MediaType.APPLICATION_JSON_VALUE)
+
     public ResponseEntity getVehicles(@RequestParam(name = "categoryName") String categoryName, @RequestParam(name="pickUpDate") LocalDateTime pickUpDate, @RequestParam(name="dropDate")LocalDateTime dropDate, @RequestParam(name="locationId") int locationId) throws VehicleNotFoundException
     {
         List<Vehicle> vehicleList=vehicleService.getAllVehicles();

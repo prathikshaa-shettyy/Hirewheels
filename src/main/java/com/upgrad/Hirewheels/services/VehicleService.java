@@ -12,5 +12,8 @@ public interface VehicleService {
     List<Vehicle> getAllVehicles();
     List<Vehicle> getVehicleByUserId(User user);
     List<Vehicle> getAvailableVehicles(VehicleSubCategory vehicleSubcategory, Booking booking);
+    public Vehicle acceptVehicleDetails(Vehicle vehicle);
+
+
 
 }
